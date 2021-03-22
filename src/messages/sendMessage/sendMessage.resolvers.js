@@ -28,21 +28,6 @@ export default {
               },
             },
           });
-          const newMessage = await client.message.create({
-            data: {
-              payload,
-              room: {
-                connect: {
-                  id: room.id,
-                },
-              },
-              user: {
-                connect: {
-                  id: loggedInUser.id,
-                },
-              },
-            },
-          });
         } else if (roomId) {
           room = await client.room.findUnique({
             where: {
@@ -74,8 +59,10 @@ export default {
             },
           },
         });
+
         pubsub.publish(NEW_MESSAGE, { roomUpdates: { ...message } });
         return {
+          id: message.id,
           ok: true,
         };
       }

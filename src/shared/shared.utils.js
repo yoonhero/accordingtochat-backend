@@ -8,13 +8,14 @@ AWS.config.update({
 });
 
 export const uploadToS3 = async (file, userId, folderName) => {
+  console.log(file);
   const { filename, createReadStream } = await file;
   const readStream = createReadStream();
   const objectName = `${folderName}/${userId}-${filename}`;
 
   const { Location } = await new AWS.S3()
     .upload({
-      Bucket: "yoonhero-instaclone-uploads",
+      Bucket: "accordingtocoding-chatapp",
       Key: objectName,
       ACL: "public-read",
       Body: readStream,

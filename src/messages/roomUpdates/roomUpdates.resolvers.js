@@ -23,6 +23,8 @@ export default {
         if (!room) {
           throw new Error("You shall not see this.");
         }
+
+        console.log(root);
         return withFilter(
           () => pubsub.asyncIterator(NEW_MESSAGE),
           async ({ roomUpdates }, { id }, { loggedInUser }) => {
